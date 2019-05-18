@@ -1,52 +1,33 @@
-<!-- Widgets Section -->
-<?php if ( is_active_sidebar( 'footer-widget-area' ) ){ ?>
-<div class="hero-widgets-section">
-	<div class="container">
-		<div class="row">
-			<?php dynamic_sidebar( 'footer-widget-area' ); ?>			
-		</div>
-	</div>
-</div>
-<?php } ?>
-<!-- /Widgets Section -->
 <?php
-$rambo_pro_theme_options = theme_data_setup();
-$current_options = wp_parse_args(  get_option( 'rambo_pro_theme_options', array() ), $rambo_pro_theme_options ); ?>
-<!-- Footer Section -->
-<div class="footer-section">
-	<div class="container">
-		<div class="row">
-			<div class="span8">
-				<?php if( isset( $current_options['footer_copyright'] ) && $current_options['footer_copyright'] != '' ) { ?>
-				<p><?php echo wp_kses_data( $current_options['footer_copyright'] ); ?></p>	
-				<?php } else{ ?> 
-				<p><?php _e('Copyright @ 2018 - RAMBO Powered By ','workpress');?> <a target="_blank" href="<?php echo esc_url ( 'http://wordpress.org/') ; ?>"> <?php _e('WordPress','workpress');?></a>&nbsp;&nbsp;<?php } ?>
-			</div>
-			<div class="span4">
-				<?php  
-					if( is_active_sidebar('footer-social-icon-sidebar-area'))
-					{
-					dynamic_sidebar('footer-social-icon-sidebar-area');
-					}
-					?>
-			</div>		
-		</div>
-	</div>		
-</div>		
-<!-- Footer Section-->
+/**
+ * The template for displaying the footer
+ *
+ * Contains the closing of the #content div and all content after.
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
+ *
+ * @package WP_Bootstrap_Starter
+ */
 
-<?php
-// custom css
-if ( version_compare( $GLOBALS['wp_version'], '4.6', '>=' ) ) {
-}
-else{
-	$rambo_pro_theme_options = theme_data_setup();
-	$current_options = wp_parse_args(  get_option( 'rambo_pro_theme_options', array() ), $rambo_pro_theme_options );
-	if($current_options['webrit_custom_css']!='') {
-		echo '<style>'.wp_filter_nohtml_kses($current_options['webrit_custom_css']).'</style>';
-	}
-}
-wp_footer(); ?>
-</div>
+?>
+<?php if(!is_page_template( 'blank-page.php' ) && !is_page_template( 'blank-page-with-container.php' )): ?>
+			</div><!-- .row -->
+		</div><!-- .container -->
+	</div><!-- #content -->
+    <?php get_template_part( 'footer-widget' ); ?>
+	<footer id="colophon" class="site-footer <?php echo wp_bootstrap_starter_bg_class(); ?>" role="contentinfo">
+		<div class="container pt-3 pb-3">
+            <div class="site-info">
+                &copy; <?php echo date('Y'); ?> <?php echo '<a href="'.home_url().'">'.get_bloginfo('name').'</a>'; ?>
+                <span class="sep"> | </span>
+                <a class="credits" href="https://uniceplac.edu.br/" target="_blank" title="Site UNICEPLAC" alt="Todos os direitos reservados a UNICEPLAC"><?php echo esc_html__('Todos os direitos reservados a UNICEPLAC','wp-bootstrap-starter'); ?></a>
+
+            </div><!-- close .site-info -->
+		</div>
+	</footer><!-- #colophon -->
+<?php endif; ?>
+</div><!-- #page -->
+
+<?php wp_footer(); ?>
 </body>
 </html>
